@@ -37,8 +37,10 @@ class GuruController extends Controller
         }
 
       $html = $htmlBuilder
-      ->addColumn(['data'=>'nip','name'=>'nip','title'=>'NIP'])
-      ->addColumn(['data'=>'user.name','name'=>'user.name','title'=>'Nama']);
+      ->addColumn(['data'=>'nip','name'=>'nip','title'=>' NIP'])
+      ->addColumn(['data'=>'user.name','name'=>'user.name','title'=>' Nama'])
+      ->addColumn(['data'=>'status','name'=>'status','title'=>' Status'])
+      ->addColumn(['data'=>'jabatan','name'=>'jabatan','title'=>' Jabatan']);
 
       return view('guru.index')->with(compact('html'));
     }
