@@ -11,17 +11,6 @@
     <link href="../css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
     <link href="../css/iCheck/all.css" rel="stylesheet" type="text/css" />
     <link href="../css/style.css" rel="stylesheet" type="text/css" />
-          <style type="text/css">
-          .footer{
-
-    text-align:center;
-    padding: 10px;
-    background-color:black;
-    font-weight: bold;
-    bottom: true;
-    color: white;
-}
-          </style>
       </head>
       <body class="skin-black">
         <header class="header">
@@ -72,6 +61,7 @@
                             </div>
                         </section>
                     </aside>
+                    </div>
 
              
 

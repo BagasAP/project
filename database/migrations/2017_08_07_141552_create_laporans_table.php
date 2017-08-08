@@ -15,17 +15,18 @@ class CreateLaporansTable extends Migration
     {
         Schema::create('laporans', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('guru_id')->unsigned();
-            $table->integer('id_sekolah')->unsigned();
+            $table->integer('id_gurus')->unsigned();
+            $table->integer('id_sekolahs')->unsigned();
+            $table->integer('id_penilaians')->unsigned();
             $table->integer('total');
-            $table->integer('id_penilaian')->unsigned();
-            $table->foreign('guru_id')->references('id')->on('gurus')
-            ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('id_sekolah')->references('id')->on('sekolahs')
-            ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('id_penilaian')->references('id')->on('penilaians');
-          
             $table->timestamps();
+            $table->foreign('id_gurus')->references('id')->on('gurus')
+            ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_sekolahs')->references('id')->on('sekolahs')
+            ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_penilaians')->references('id')->on('penilaians')
+            ->onUpdate('cascade')->onDelete('cascade');
+          
 
         });
     }

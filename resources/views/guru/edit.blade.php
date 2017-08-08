@@ -6,17 +6,17 @@
 			<div class="col-md-12">
 				<ul class="breadcrumb">
 					<li><a href="{{ url('/home') }}">Dashboard</a></li>
-					<li>Guru</li>
-					<li class="active">Tambah Data Guru</li>
+					<li><a href="{{ url('/guru.create') }}">Guru</a></li>
+					<li class="active">Ubah Data Guru</li>
 				</ul>
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h2 class="panel-title">Tambah Guru</h2>
+						<h2 class="panel-title">Ubah Guru</h2>
 					</div>
 
 					<div class="panel-body">
-						{!! Form::open(['url' => route('guru.store'),
-						'method' => 'post', 'class' => 'form-horizontal']) !!}
+						{!! Form::open(['url' => route('guru.update',$guru->id),
+						'method' => 'put', 'class' => 'form-horizontal']) !!}
 						@include('guru._form')
 						{!! Form::close() !!}
 					</div>

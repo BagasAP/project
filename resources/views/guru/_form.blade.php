@@ -1,42 +1,120 @@
-<div class="form-group{{ $errors->has('title') ? 'has-error' : ''}}">
-    {!! Form::label('title', 'NIP', ['class'=>'col-md-2 control-label']) !!}
+<div class="form-group{{ $errors->has('nip') ? 'has-error' : ''}}">
+    {!! Form::label('nip', 'NIP', ['class'=>'col-md-2 control-label']) !!}
     <div class="col-md-4">
     {!! Form::text('title', null, ['class'=>'form-control']) !!}
   	{!! $errors->first('title', '<p class="help-block">:message</p>') !!}
     </div>
  </div>
-
- <div class="form-group{{ $errors->has('author_id') ? 'has-error' : ''}}">
-    {!! Form::label('author_id', 'Penulis', ['class'=>'col-md-2 control-label']) !!}
+ <div class="form-group{{ $errors->has('user_id') ? 'has-error' : ''}}">
+    {!! Form::label('user_id', 'Nama', ['class'=>'col-md-2 control-label']) !!}
     <div class="col-md-4">
-    {!! Form::select('author_id', [''=>'']+App\Author::pluck('name','id')->all(), null, [
-    'class'=>'js-selectize',
-    'placeholder'=>'Pilih Penulis']) !!}
-  	{!! $errors->first('author_id', '<p class="help-block">:message</p>') !!}
+    {!! Form::text('title', null, ['class'=>'form-control']) !!}
+    {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
+    </div>
+ </div>
+  <div class="form-group{{ $errors->has('status') ? 'has-error' : ''}}">
+    {!! Form::label('status', 'Status', ['class'=>'col-md-2 control-label']) !!}
+    <div class="col-md-4">
+    {!! Form::text('title', null, ['class'=>'form-control']) !!}
+    {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
+    </div>
+ </div>
+<div class="form-group{{ $errors->has('jabatan') ? 'has-error' : ''}}">
+    {!! Form::label('jabatan', 'Jabatan', ['class'=>'col-md-2 control-label']) !!}
+    <div class="col-md-4">
+    {!! Form::text('title', null, ['class'=>'form-control']) !!}
+    {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
+    </div>
+ </div>
+<div class="form-group{{ $errors->has('pendidikan') ? 'has-error' : ''}}">
+    {!! Form::label('pendidikan', 'Pendidikan', ['class'=>'col-md-2 control-label']) !!}
+    <div class="col-md-4">
+    {!! Form::text('title', null, ['class'=>'form-control']) !!}
+    {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
+    </div>
+ </div>
+ <div class="form-group">
+    
+ {!! Form::label('jk', 'Jenis Kelamin', ['class'=>'col-md-2 control-label']) !!}
+ <div class="col-md-4">
+    <input type="radio" name="jk" value="Laki-Laki">Laki-Laki &nbsp;&nbsp;
+    <input type="radio" name="jk" value="Perempuan">Perempuan
+    </div>
+ </div>
+ <div class="form-group{{ $errors->has('alamat') ? 'has-error' : ''}}">
+    {!! Form::label('alamat', 'Alamat', ['class'=>'col-md-2 control-label']) !!}
+    <div class="col-md-4">
+    {!! Form::textarea('title', null, ['class'=>'form-control']) !!}
+    {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
+    </div>
+ </div>
+ <div class="form-group{{ $errors->has('ttl') ? 'has-error' : ''}}">
+    {!! Form::label('ttl', 'Tanggal Lahir', ['class'=>'col-md-2 control-label']) !!}
+    <div class="col-md-4">
+    {!! Form::date('title', null, ['class'=>'form-control']) !!}
+    {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
+    </div>
+ </div>
+ <div class="form-group{{ $errors->has('mulai_kerja') ? 'has-error' : ''}}">
+    {!! Form::label('mulai_kerja', 'Mulai Kerja', ['class'=>'col-md-2 control-label']) !!}
+    <div class="col-md-4">
+    {!! Form::date('title', null, ['class'=>'form-control']) !!}
+    {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
+    </div>
+ </div>
+ <div class="form-group{{ $errors->has('mapel') ? 'has-error' : ''}}">
+    {!! Form::label('mapel', 'Mata Pelajaran', ['class'=>'col-md-2 control-label']) !!}
+    <div class="col-md-4">
+    {!! Form::text('title', null, ['class'=>'form-control']) !!}
+    {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
+    </div>
+ </div>
+ <div class="form-group{{ $errors->has('no_telp') ? 'has-error' : ''}}">
+    {!! Form::label('no_telp', 'No Telepon', ['class'=>'col-md-2 control-label']) !!}
+    <div class="col-md-4">
+    {!! Form::text('title', null, ['class'=>'form-control']) !!}
+    {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
+    </div>
+ </div>
+ <div class="form-group{{ $errors->has('masa_mengajar') ? 'has-error' : ''}}">
+    {!! Form::label('masa_mengajar', 'Masa Mengajar', ['class'=>'col-md-2 control-label']) !!}
+    <div class="col-md-4">
+    {!! Form::number('title', null, ['class'=>'form-control']) !!}
+    {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
+    </div>
+ </div>
+ <div class="form-group{{ $errors->has('kelas') ? 'has-error' : ''}}">
+    {!! Form::label('kelas', 'Kelas', ['class'=>'col-md-2 control-label']) !!}
+    <div class="col-md-4">
+    {!! Form::text('title', null, ['class'=>'form-control']) !!}
+    {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
+    </div>
+ </div>
+ <div class="form-group{{ $errors->has('tahun_ajaran') ? 'has-error' : ''}}">
+    {!! Form::label('tahun_ajaran', 'Tahun Ajaran', ['class'=>'col-md-2 control-label']) !!}
+    <div class="col-md-4">
+    {!! Form::text('title', null, ['class'=>'form-control']) !!}
+    {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
+    </div>
+ </div>
+ <div class="form-group{{ $errors->has('periode') ? 'has-error' : ''}}">
+    {!! Form::label('periode', 'Periode', ['class'=>'col-md-2 control-label']) !!}
+    <div class="col-md-4">
+    {!! Form::number('title', null, ['class'=>'form-control']) !!}
+    {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
+    </div>
+ </div>
+ <div class="form-group{{ $errors->has('foto') ? 'has-error' : ''}}">
+    {!! Form::label('foto', 'Foto', ['class'=>'col-md-2 control-label']) !!}
+    <div class="col-md-4">
+    {!! Form::file('foto') !!}
+    {!! $errors->first('foto', '<p class="help-block">:message</p>') !!}
     </div>
  </div>
 
- <div class="form-group{{ $errors->has('amount') ? 'has-error' : ''}}">
-    {!! Form::label('amount', 'Jumlah', ['class'=>'col-md-2 control-label']) !!}
-    <div class="col-md-4">
-    {!! Form::text('amount', null, ['class'=>'form-control']) !!}
-  	{!! $errors->first('amount', '<p class="help-block">:message</p>') !!}
 
-    </div>
- </div>
 
- <div class="form-group{{ $errors->has('cover') ? 'has-error' : ''}}">
-    {!! Form::label('cover', 'Cover', ['class'=>'col-md-2 control-label']) !!}
-    <div class="col-md-4">
-    {!! Form::file('cover') !!}
-    @if (isset($book)&& $book->cover)
-    <p>
-        {!! Html::image(asset('img/'.$book->cover), null, ['class'=>'img-rounded img-responsive']) !!}
-    </p>
-    @endif
-  	{!! $errors->first('cover', '<p class="help-block">:message</p>') !!}
-    </div>
- </div>
+
 
  <div class="form-group">
  	<div class="col-md-4 col-md-offset-2">

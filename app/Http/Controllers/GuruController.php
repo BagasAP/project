@@ -22,7 +22,14 @@ class GuruController extends Controller
         //
         if($request->ajax()){
             $guru = Guru::with('user');
-            return Datatables::of($guru)->make(true);
+            return Datatables::of($guru)
+            ->addColumn('action', function($guru){
+                return view('datatable._action',[
+                     'model' => $guru,
+                    'form_url' => route('guru.destroy', $guru->id),
+                    'edit_url' => route('guru.edit', $guru->id),
+                    'confirm_message' => 'Yakin mau menghapus'.$guru->title.'?']);
+            })->make(true);
         }
 
       $html = $htmlBuilder
@@ -34,10 +41,7 @@ class GuruController extends Controller
       ->addColumn(['data'=>'pendidikan','name'=>'pendidikan','title'=>'Pendidikan'])
       ->addColumn(['data'=>'jk','name'=>'jk','title'=>'Jenis Kelamin'])
       ->addColumn(['data'=>'alamat','name'=>'alamat','title'=>'Alamat'])
-      ->addColumn(['data'=>'ttl','name'=>'ttl','title'=>'Tanggal Lahir'])
-      ->addColumn(['data'=>'mulai_kerja','name'=>'mulai_kerja','title'=>'Mulai Kerja'])
-      ->addColumn(['data'=>'mapel','name'=>'mapel','title'=>'MAPEL'])
-;
+      ->addColumn(['data'=>'action','name'=>'action','title'=>'','orderable'=>false,'searchable'=>false]);
 
       return view('guru.index')->with(compact('html'));
     }
@@ -62,6 +66,9 @@ class GuruController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request,['nip','status']);
+        $guru =Guru::create($request->all());
+        return redirect()->route('guru.index');
     }
 
     /**
@@ -84,6 +91,8 @@ class GuruController extends Controller
     public function edit($id)
     {
         //
+        $guru = Guru::find($id);
+        return view('guru.edit')->with(compact('guru'));
     }
 
     /**
@@ -96,6 +105,7 @@ class GuruController extends Controller
     public function update(Request $request, $id)
     {
         //
+        
     }
 
     /**
@@ -107,5 +117,13 @@ class GuruController extends Controller
     public function destroy($id)
     {
         //
+        $guru->delete();
+
+        Session::flash("flash_notification",[
+            "level"=>"success",
+            "message"=>"Data Berhasil Di Hapus"
+            ]);
+
+        return redirect()->route('guru.index');
     }
 }
