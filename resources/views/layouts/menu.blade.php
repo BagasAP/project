@@ -1,16 +1,16 @@
 
                             <ul class="sidebar-menu">
                                 <li class="active">
-                                    <a href="index.php">
+                                    <a href="{{ url('/home')}}">
                                         <i class="fa fa-th-large"></i> <span>Menu</span>
                                     </a>
                                 </li>
                                 
                                 <li class="treeview">
-                                <a href="#">
+                                <a href=" {{ url('/profile.index')}}">
                                     <i class="fa fa-user"></i>
                                     <span>Profile</span>
-                                    <i class="fa fa-angle-left pull-right"></i>
+                                   
                                 </a>
                             
                                 </li>

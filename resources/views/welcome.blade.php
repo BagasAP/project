@@ -4,11 +4,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Home</div>
-            <div class="flex-center position-ref full-height">
-        </div>
-        </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading" align="center">WELCOME</div>
+                <div class="panel-body" align="center">
+                ~ SELAMAT DATANG DI PENILAIAN KINERJA GURU ~
+                </div>
+                 </div>
     </div>
 </div>
 @endsection

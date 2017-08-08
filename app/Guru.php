@@ -8,7 +8,7 @@ class Guru extends Model
 {
     //
 
-    protected $fillable = ['nip', 'status', 'jabatan', 'pendidikan', 'jk', 'alamat', 'ttl', 'mulai_kerja','mapel','no_telp','masa_mengajar', 'kelas', 'tahun_ajaran', 'periode','user_id','foto'];
+    protected $fillable = ['id','nip', 'status', 'jabatan', 'pendidikan', 'jk', 'alamat', 'ttl', 'mulai_kerja','mapel','no_telp','masa_mengajar', 'kelas', 'tahun_ajaran', 'periode','user_id','foto'];
 
     public function user()
     {

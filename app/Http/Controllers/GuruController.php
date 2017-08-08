@@ -15,32 +15,29 @@ class GuruController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function __construct()
-    {
-        $this->middleware('auth');
-    }
+     
     
     public function index(Request $request, Builder $htmlBuilder)
     {
         //
         if($request->ajax()){
             $guru = Guru::with('user');
-            return Datatables::of($guru)
-            ->addColumn('action', function($book){
-                return view('datatable._action',[
-                    'model' => $guru,
-                    'form_url' => route('guru.destroy', $guru->id),
-                    'edit_url' => route('guru.edit', $guru->id),
-                    'confirm_message' => 'Yakin mau menghapus '.$guru->user_id .'?'
-                    ]);
-            })->make(true);
+            return Datatables::of($guru)->make(true);
         }
 
       $html = $htmlBuilder
-      ->addColumn(['data'=>'nip','name'=>'nip','title'=>' NIP'])
-      ->addColumn(['data'=>'user.name','name'=>'user.name','title'=>' Nama'])
-      ->addColumn(['data'=>'status','name'=>'status','title'=>' Status'])
-      ->addColumn(['data'=>'jabatan','name'=>'jabatan','title'=>' Jabatan']);
+      ->addColumn(['data'=>'id','name'=>'id','title'=>'No'])
+      ->addColumn(['data'=>'nip','name'=>'nip','title'=>'NIP'])
+      ->addColumn(['data'=>'user.name','name'=>'user.name','title'=>'Nama'])
+      ->addColumn(['data'=>'status','name'=>'status','title'=>'Status'])
+      ->addColumn(['data'=>'jabatan','name'=>'jabatan','title'=>'Jabatan'])
+      ->addColumn(['data'=>'pendidikan','name'=>'pendidikan','title'=>'Pendidikan'])
+      ->addColumn(['data'=>'jk','name'=>'jk','title'=>'Jenis Kelamin'])
+      ->addColumn(['data'=>'alamat','name'=>'alamat','title'=>'Alamat'])
+      ->addColumn(['data'=>'ttl','name'=>'ttl','title'=>'Tanggal Lahir'])
+      ->addColumn(['data'=>'mulai_kerja','name'=>'mulai_kerja','title'=>'Mulai Kerja'])
+      ->addColumn(['data'=>'mapel','name'=>'mapel','title'=>'MAPEL'])
+;
 
       return view('guru.index')->with(compact('html'));
     }
@@ -53,6 +50,7 @@ class GuruController extends Controller
     public function create()
     {
         //
+        return view('guru.create');
     }
 
     /**
