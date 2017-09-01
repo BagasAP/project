@@ -19,6 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix'=>'admin','middleware'=>['auth']], function(){
+Route::group(['prefix'=>'admin','middleware'=>['auth', 'role:admin']], function(){
 	Route::resource('guru','GuruController');
+	Route::resource('penilaian','PenilaianController');
+	Route::resource('laporan','HasilController');
+	Route::resource('profile','ProfileController');
+	Route::resource('sekolah','SekolahController');
 });
+
+Route::resource('hasil','HasilController');

@@ -25,9 +25,15 @@ class UsersSeeder extends Seeder
         $memberRole->display_name ="Member";
         $memberRole->save();
 
+        //membuat role member
+        $guruRole = new Role();
+        $guruRole->name = "guru";
+        $guruRole->display_name ="Guru";
+        $guruRole->save();
+
         //Membuat sample admin
         $admin = new User();
-        $admin->name ='Admin Larapus';
+        $admin->name ='Admin Guru';
         $admin->email ='admin@gmail.com';
         $admin->password = bcrypt('rahasia');
         $admin->save();
@@ -40,5 +46,13 @@ class UsersSeeder extends Seeder
         $member->password = bcrypt('rahasia');
         $member->save();
         $member->attachRole($memberRole);
+
+        //Membuat sample member
+        $member = new User();
+        $member->name = "Sample Guru";
+        $member->email = 'guru@gmail.com';
+        $member->password = bcrypt('rahasia');
+        $member->save();
+        $member->attachRole($guruRole);
     }
 }

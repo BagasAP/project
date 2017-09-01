@@ -1,0 +1,29 @@
+create
+if ($request->hasFile('photo')) {
+        $file = $request->file('photo');
+        $destinationPath = public_path().'/assets/img/';
+        $filename = str_random(6).'_'.$file->getClientOriginalName();
+        $uploadSuccess = $file->move($destinationPath, $filename);
+        $blog->photo = $filename;
+        }
+        
+update
+if ($request->hasFile('photo')) {
+        $file = $request->file('photo');
+        $destinationPath = public_path().'/assets/img/';
+        $filename = str_random(6).'_'.$file->getClientOriginalName();
+        $uploadSuccess = $file->move($destinationPath, $filename);
+
+        if ($blog->photo) {
+        $old_photo = $blog->photo;
+        $filepath = public_path() . DIRECTORY_SEPARATOR . 'assets/img'
+        . DIRECTORY_SEPARATOR . $blog->photo;
+        try {
+        File::delete($filepath);
+        } catch (FileNotFoundException $e) {
+        // File sudah dihapus/tidak ada
+        }
+        }
+
+        $blog->photo = $filename;
+        }

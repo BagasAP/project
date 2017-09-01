@@ -19,8 +19,12 @@ class CreatePenilaiansTable extends Migration
             $table->integer('kedisiplinan');
             $table->integer('pelayanan_prima');
             $table->integer('ketuntasan_nilai');
-            $table->integer('guruid')->unsigned();
-            $table->foreign('guruid')->references('id')->on('gurus')
+            $table->integer('semester');
+            $table->string('tahun_ajaran');
+            $table->date('tgl_penilaian');
+            $table->integer('total');
+            $table->integer('userid')->unsigned();
+            $table->foreign('userid')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

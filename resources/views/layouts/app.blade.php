@@ -9,17 +9,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    
+
     <!-- Styles -->
     <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="/css/bootsrap.min.css" rel="stylesheet">
-    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
-    <link href="/css/jquery.dataTables.css" rel="stylesheet">
-    <link href="/css/dataTables.bootstrap.css" rel="stylesheet">
-    <link href="/css/selectize.css" rel="stylesheet">
-    <link href="/css/selectize.bootstrap3.css" rel="stylesheet">
+
 </head>
-<body>
+<body background="{{asset('kinerja.jpg')}}" style="background-attachment: fixed;
+background-size: cover; ">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -42,9 +39,22 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                         @if(Auth::check())
-                        <li><a href="{{ route('guru.index')}}">Guru</a></li>
+                     @if (Auth::check())
+                        <!-- <li><a href="{{route('profile.index')}}">Profile</a></li> -->
+                        
                         @endif
+                        @role('admin')
+                            <li><a href="{{route('guru.index')}}">Guru</a></li>
+                            <li><a href="{{route('penilaian.index')}}">Penilaian</a></li>
+                            <li><a href="{{route('sekolah.index')}}">Sekolah</a></li>
+                            <li><a href="{{route('laporan.index')}}">Laporan</a></li>
+                            <li><a href="{{route('profile.index')}}">User</a></li>
+                        @endrole
+                        @role('guru')
+                            <li><a href="{{route('hasil.index')}}">Laporan</a></li>
+                        @endrole
+
+                    
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -52,7 +62,7 @@
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Daftar</a></li>
+                           <!--  <li><a href="{{ route('register') }}">Register</a></li> -->
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -78,18 +88,13 @@
                 </div>
             </div>
         </nav>
-
+        @include('layouts._flash')
         @yield('content')
-        
     </div>
 
     <!-- Scripts -->
-    <script src="/js/selectize.min.js"></script>
-    <script src="/js/app.js"></script>
-    <script src="/js/jquery.dataTables.min.js"></script>
-    <script src="/js/dataTables.bootstrap.min.js"></script>
-    <script src="/js/custom.js"></script>
 
-    @yield('scripts')
+    <script src="/js/app.js"></script>
+    <script src="/js/custom.js"></script>
 </body>
 </html>

@@ -16,10 +16,11 @@ class CreateSekolahsTable extends Migration
         Schema::create('sekolahs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_sekolah');
-            $table->integer('nss');
+            $table->integer('ns');
             $table->string('status');
             $table->string('nama_kepsek');
             $table->text('alamat');
+            $table->string('telp');
             $table->timestamps();
         });
     }

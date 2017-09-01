@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Sekolah extends Model
 {
     //
-     protected $fillable = [
-        'nama_sekolah', 'nss', 'status', 'nama_kepsek','alamat',
+     protected $fillable = ['id',
+        'nama_sekolah', 'nss', 'status', 'nama_kepsek','alamat'
     ];
 
-    public function laporan()
+    public function hasil()
     {
-    	return $this->hasMany('App\Laporan');
+    	return $this->hasMany('App\Hasil');
     }
-// }
+
+
+}

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLaporansTable extends Migration
+class CreateHasilsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,21 @@ class CreateLaporansTable extends Migration
      */
     public function up()
     {
-        Schema::create('laporans', function (Blueprint $table) {
+        Schema::create('hasils', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('id_users')->unsigned();
             $table->integer('id_gurus')->unsigned();
             $table->integer('id_sekolahs')->unsigned();
             $table->integer('id_penilaians')->unsigned();
-            $table->integer('total');
             $table->timestamps();
+            $table->foreign('id_users')->references('id')->on('users')
+            ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_gurus')->references('id')->on('gurus')
             ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_sekolahs')->references('id')->on('sekolahs')
             ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_penilaians')->references('id')->on('penilaians')
             ->onUpdate('cascade')->onDelete('cascade');
-          
-
         });
     }
 
@@ -38,6 +38,6 @@ class CreateLaporansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('laporans');
+        Schema::dropIfExists('hasils');
     }
 }

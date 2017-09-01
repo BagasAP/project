@@ -7,12 +7,15 @@
                                 </li>
                                 
                                 <li class="treeview">
-                                <a href=" {{ url('/profile.index')}}">
+                                <a href="">
                                     <i class="fa fa-user"></i>
-                                    <span>Profile</span>
-                                   
+                                    <span>Profile</span> 
+                                    <i class="fa fa-angle-left pull-right"></i>
                                 </a>
-                            
+                                 <ul class="treeview-menu">
+                                        <li><a href="{{route('profile.index')}}"><i class="fa fa-angle-double-right"></i> Data Profile</a></li>
+                                        <li><a href="{{route('guru.create')}}"><i class="fa fa-angle-double-right"></i> Tambah Profile</a></li>
+                                    </ul>
                                 </li>
 
                                 <li class="treeview">
@@ -34,7 +37,7 @@
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </a>
                                     <ul class="treeview-menu">
-                                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Data Penilaian</a></li>
+                                        <li><a href="{{ route('penilaian.index')}}"><i class="fa fa-angle-double-right"></i> Data Penilaian</a></li>
                                         <li><a href="#"><i class="fa fa-angle-double-right"></i> Tambah Penilaian</a></li>
                                     </ul>
                                 </li>
@@ -46,7 +49,7 @@
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </a>
                                     <ul class="treeview-menu">
-                                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Data Laporan</a></li>
+                                        <li><a href="{{route('laporan.index')}}"><i class="fa fa-angle-double-right"></i> Data Laporan</a></li>
                                         <li><a href="#"><i class="fa fa-angle-double-right"></i> Tambah Laporan</a></li>
                                     </ul>
                                 </li>

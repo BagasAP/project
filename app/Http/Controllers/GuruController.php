@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Guru;
-use Yajra\Datatables\Html\Builder;
-use Yajra\Datatables\Datatables;
+use App\Hasil;
+use Session;
+// use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Role;
 class GuruController extends Controller
 {
     /**
@@ -15,35 +17,13 @@ class GuruController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     
+     // use RegistersUsers;
     
-    public function index(Request $request, Builder $htmlBuilder)
+    public function index()
     {
         //
-        if($request->ajax()){
-            $guru = Guru::with('user');
-            return Datatables::of($guru)
-            ->addColumn('action', function($guru){
-                return view('datatable._action',[
-                     'model' => $guru,
-                    'form_url' => route('guru.destroy', $guru->id),
-                    'edit_url' => route('guru.edit', $guru->id),
-                    'confirm_message' => 'Yakin mau menghapus'.$guru->title.'?']);
-            })->make(true);
-        }
-
-      $html = $htmlBuilder
-      ->addColumn(['data'=>'id','name'=>'id','title'=>'No'])
-      ->addColumn(['data'=>'nip','name'=>'nip','title'=>'NIP'])
-      ->addColumn(['data'=>'user.name','name'=>'user.name','title'=>'Nama'])
-      ->addColumn(['data'=>'status','name'=>'status','title'=>'Status'])
-      ->addColumn(['data'=>'jabatan','name'=>'jabatan','title'=>'Jabatan'])
-      ->addColumn(['data'=>'pendidikan','name'=>'pendidikan','title'=>'Pendidikan'])
-      ->addColumn(['data'=>'jk','name'=>'jk','title'=>'Jenis Kelamin'])
-      ->addColumn(['data'=>'alamat','name'=>'alamat','title'=>'Alamat'])
-      ->addColumn(['data'=>'action','name'=>'action','title'=>'','orderable'=>false,'searchable'=>false]);
-
-      return view('guru.index')->with(compact('html'));
+        $guru= Guru::with('user')->get();
+        return view('guru.index', compact('guru'));
     }
 
     /**
@@ -54,7 +34,8 @@ class GuruController extends Controller
     public function create()
     {
         //
-        return view('guru.create');
+        $guru = User::all();
+        return view('guru.create', compact('guru'));
     }
 
     /**
@@ -66,9 +47,38 @@ class GuruController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request,['nip','status']);
-        $guru =Guru::create($request->all());
+        $user = User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password'])
+        ]);
+        $guruRole = Role::where('name', 'guru')->first();
+        $user->attachRole($guruRole);
+
+        $this->validate($request,[
+            'nip'=>"required|unique:gurus,nip"]);
+        
+        $guru = new Guru();
+        $guru->nip = $request->nip;
+        $guru->status = $request->status;
+        $guru->pendidikan = $request->pendidikan;
+        $guru->jk = $request->jk;
+        $guru->alamat = $request->alamat;
+        $guru->ttl = $request->ttl;
+        $guru->mulai_kerja = $request->mulai_kerja;
+        $guru->no_telp = $request->no_telp;
+        $guru->masa_mengajar = $request->masa_mengajar;
+        $guru->kelas = $request->kelas;
+        $guru->mapel = $request->mapel;
+        $guru->user_id = $user->id;
+        $guru->save();
+        
+        Session::flash("flash_notification",[
+            "level"=>"success",
+            "message"=>"Berhasil Menyimpan Data Guru"
+            ]);
         return redirect()->route('guru.index');
+        
     }
 
     /**
@@ -91,8 +101,9 @@ class GuruController extends Controller
     public function edit($id)
     {
         //
-        $guru = Guru::find($id);
-        return view('guru.edit')->with(compact('guru'));
+        $user = User::all();
+        $guru = Guru::findOrFail($id);
+        return view('guru.edit')->with(compact('guru','user'));
     }
 
     /**
@@ -105,6 +116,27 @@ class GuruController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $guru = Guru::findOrFail($id);
+        $guru->nip = $request->nip;
+        $guru->status = $request->status;
+        $guru->pendidikan = $request->pendidikan;
+        $guru->jk = $request->jk;
+        $guru->alamat = $request->alamat;
+        $guru->ttl = $request->ttl;
+        $guru->mulai_kerja = $request->mulai_kerja;
+        $guru->no_telp = $request->no_telp;
+        $guru->masa_mengajar = $request->masa_mengajar;
+        $guru->kelas = $request->kelas;
+        // $guru->foto = $request->foto;
+        $guru->mapel = $request->mapel;
+        $guru->user_id = $request->user_id;
+        $guru->save();
+        Session::flash("flash_notification",[
+            "level"=>"success",
+            "message"=>"Berhasil Merubah Data Guru"
+            ]);
+        return redirect()->route('guru.index');
         
     }
 
@@ -117,11 +149,10 @@ class GuruController extends Controller
     public function destroy($id)
     {
         //
-        $guru->delete();
-
+         if (!Guru::destroy($id)) return redirect()->back(); 
         Session::flash("flash_notification",[
             "level"=>"success",
-            "message"=>"Data Berhasil Di Hapus"
+            "message"=>"Guru berhasil dihapus"
             ]);
 
         return redirect()->route('guru.index');
